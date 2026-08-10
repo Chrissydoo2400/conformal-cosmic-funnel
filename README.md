@@ -1,1 +1,1 @@
-Open-source python implementation of a non-singular cosmological pipeline. Explores vacuum geometry stability proofs (R_μν = 0), spatial coordinate horizon limits, and full-sky angular velocity optimization sweeps against CMB lensing metrics.
+
