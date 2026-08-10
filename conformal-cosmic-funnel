@@ -1,0 +1,45 @@
+import numpy as np
+import healpy as hp  
+from scipy.optimize import minimize_scalar
+
+def load_real_cmb_data(fits_file_path):
+    print(f"Opening CMB Map: {fits_file_path}")
+    cmb_map = hp.read_map(fits_file_path, field=0)
+    return cmb_map
+
+def apply_conformal_transform(cmb_map, z_boundary=1100.0):
+    scaling_factor = (1.0 + z_boundary) ** 2
+    transformed_map = cmb_map * scaling_factor
+    return transformed_map
+
+def reverse_frame_dragging(transformed_map, test_spin):
+    nside = hp.get_nside(transformed_map)
+    num_pixels = hp.nside2npix(nside)
+    theta, phi = hp.pix2ang(nside, np.arange(num_pixels))
+    vortex_shift = test_spin * np.sin(theta)
+    corrected_phi = (phi - vortex_shift) % (2 * np.pi)
+    corrected_pixels = hp.get_interp_val(transformed_map, theta, corrected_phi)
+    return corrected_pixels
+
+def calculate_isotropy_sharpness(map_data):
+    half_size = len(map_data) // 2
+    hemisphere_a = map_data[:half_size]
+    hemisphere_b = map_data[half_size:]
+    asymmetry_score = np.mean((hemisphere_a - hemisphere_b) ** 2)
+    return asymmetry_score
+
+def execute_cosmic_autopsy_pipeline(fits_file):
+    raw_data = load_real_cmb_data(fits_file)
+    flattened_data = apply_conformal_transform(raw_data, z_boundary=1100.0)
+    
+    def objective_function(spin_variable):
+        corrected_map = reverse_frame_dragging(flattened_data, spin_variable)
+        return calculate_isotropy_sharpness(corrected_map)
+    
+    print("Initiating Algorithmic Spin Sweep across magnetar limits...")
+    result = minimize_scalar(objective_function, bounds=(0.0, 2.0), method='bounded')
+    
+    print("\n=== PIPELINE RESULTS ===")
+    print(f"Optimization Status: {result.message}")
+    print(f"Identified Ancestral Parent Spin Parameter: {result.x:.5f}")
+    print(f"Residual Asymmetry Variance: {result.fun:.5f}")
