@@ -1,0 +1,58 @@
+# The Conformal Cosmic Funnel & Lens Framework
+
+> **Author:** Christian JB Winter  
+> **Repository:** [github.com/Chrissydoo2400/conformal-cosmic-funnel](https://github.com/Chrissydoo2400/conformal-cosmic-funnel)
+
+---
+
+## Executive Overview
+
+The **Conformal Cosmic Funnel & Lens Framework** proposes a non-singular model for stellar collapse past the Tolman-Oppenheimer-Volkoff (TOV) limit. By generalizing the Kerr spacetime metric in Boyer-Lindquist coordinates, this framework demonstrates how relativistic angular momentum ($J_\phi$) and negative radial pressure ($P_r$) prevent gravitational collapse to a singular density point ($r = 0$).
+
+Rather than terminating in a classical black hole singularity, infalling matter is channeled through a dynamically open, stabilized metric throat into an independent, expanding child spacetime. At the decoupling boundary ($z \sim 1100$), an **Isotropic Lens Operator** ($A_{\text{lens}}$) converts localized vector rotation into a homogeneous scalar pressure field, driving uniform cosmic expansion.
+
+---
+
+## Key Mathematical Foundations
+
+### 1. Kerr Metric & Ergosphere Mechanics
+Static boundaries are replaced with a stationary, axisymmetric Kerr metric template in Boyer-Lindquist coordinates:
+
+$$ds^{2}=-\left(1-\frac{2Mr}{\rho^{2}}\right)dt^{2}-\left(\frac{4Mar\sin^{2}\theta}{\rho^{2}}\right)dtd\phi+\left(\frac{\rho^{2}}{\Delta}\right)dr^{2}+\rho^{2}d\theta^{2}+\left(r^{2}+a^{2}+\frac{2Ma^{2}r\sin^{2}\theta}{\rho^{2}}\right)\sin^{2}\theta d\phi^{2}$$
+
+*(where $\rho^{2}=r^{2}+a^{2}\cos^{2}\theta$ and $\Delta=r^{2}-2Mr+a^{2}$)*
+
+The invariant spin parameter $a = J/M$ establishes an ergosphere bounded by $r_+ = M + \sqrt{M^2 - a^2}$. Relativistic frame dragging forces infalling matter into a high-velocity rotational ring configuration, preventing static collapse.
+
+### 2. Upgraded Stress-Energy Tensor Pipeline
+Mass accretion across the horizon boundary is governed by an expanded stress-energy tensor:
+
+$$T_{\mu\nu}^{\text{injected}} = (P_{\text{pipeline}} + P_\phi) u_\mu u_\nu + P_r g_{\mu\nu} + J_\phi$$
+
+* **$P_{\text{pipeline}}$**: Incoming accreted mass energy density.
+* **$P_\phi$**: Azimuthal kinetic pressure.
+* **$J_\phi$**: Conserved angular momentum, preserved due to zero vacuum drag.
+* **$P_r$**: Negative radial pressure acting as outward structural tension.
+
+### 3. Singularity Avoidance via Centrifugal Repulsion
+The geodesic equation incorporates repulsive centrifugal acceleration terms ($\Phi_{\text{centrifugal}}$):
+
+$$\frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\alpha\beta}\frac{dx^\alpha}{d\lambda}\frac{dx^\beta}{d\lambda} - \Phi_{\text{centrifugal}} = 0$$
+
+Because $T_{\phi\phi}$ cannot decay in vacuum, higher-power inverse scaling forces infalling geodesics to diverge before reaching $r = 0$. The negative radial pressure $P_r$ breaches the **Strong Energy Condition (SEC)**, maintaining a permanently open "funnel throat".
+
+### 4. The Isotropic Lens Transformation ($A_{\text{lens}}$)
+At the child universe decoupling boundary ($z \sim 1100$), the geometric diffuser function $A_{\text{lens}}$ transforms directional equatorial rotation into isotropic inflation:
+
+$$\lim_{[r\to 0,\, z\to 1100]} \left[ A_{\text{lens}} \left( J_\phi \otimes P_r \right) \right] \longrightarrow \rho_{\text{isotropic\_expansion}}$$
+
+This scrambles directional vector momentum into a uniform scalar driving pressure across the child cosmic web fabric.
+
+---
+
+## Testable Observational Predictions
+
+1. **CMB B-Mode Polarization Anisotropies ($z \sim 1100$):** Residual quadrupolar or chiral signatures left behind by incomplete vector-to-scalar scrambling during the $A_{\text{lens}}$ transformation. (Targeted by experiments like **CMB-S4** and **LiteBIRD**).
+2. **Post-Merger Gravitational Wave Echoes:** Modulations in ringdown signals following binary black hole mergers caused by the non-singular $P_r$-stabilized metric throat. (Targeted by **LIGO/Virgo/KAGRA** and **LISA**).
+3. **Horizon Silhouette Modifications:** Deviations in photon-ring silhouettes compared to standard Kerr predictions due to the open funnel throat geometry. (Targeted by the **Event Horizon Telescope (EHT)**).
+4. **Black Hole-Driven Cosmic Inflation Correlation:** A dynamic mechanism addressing the **Hubble Tension** by linking late-universe expansion rates to cumulative cosmic black hole mass accretion.
