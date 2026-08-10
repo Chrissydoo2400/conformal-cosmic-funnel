@@ -1,0 +1,81 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+class FunnelVisualizer:
+    """
+    Generates high-fidelity visual trajectories of infalling matter 
+    undergoing coordinate inversion and frame-dragging inside the Kerr metric.
+    """
+    def __init__(self, M=1.0, a=0.45):
+        self.M = M
+        self.a = a
+        # Horizons
+        self.r_plus = M + np.sqrt(max(0, M**2 - a**2))
+        
+    def generate_trajectory(self, r_start, phi_start, steps=2000, dt=0.01):
+        """
+        Integrates a toy geodesic path factoring in gravitational attraction 
+        and extreme rotational frame-dragging near the horizon.
+        """
+        r_path = []
+        phi_path = []
+        
+        r = r_start
+        phi = phi_start
+        
+        # Initial infalling radial velocity and angular momentum velocity
+        vr = -0.5  
+        vphi = 0.1 
+        
+        for _ in range(steps):
+            if r <= self.r_plus * 0.2: # Stop near internal core
+                break
+                
+            r_path.append(r)
+            phi_path.append(phi)
+            
+            # Relativistic frame-dragging acceleration boost profile
+            # As radius drops, rotation velocity spikes exponentially due to spin (a)
+            omega_dragging = (2 * self.M * self.a * r) / (r**4 + r**2 * self.a**2 + 2 * self.M * r * self.a**2)
+            
+            # Simple numerical step integration
+            vphi_net = vphi + omega_dragging
+            
+            r += vr * dt
+            phi += vphi_net * dt
+            
+        return np.array(r_path), np.array(phi_path)
+
+# Initialize simulation model plotting layout
+visualizer = FunnelVisualizer(M=1.0, a=0.45)
+
+# Generate 4 distinct streams of infalling accreted matter swirling into the funnel
+angles = [0, np.pi/2, np.pi, 3*np.pi/2]
+colors = ['#FF4500', '#00FFFF', '#FFD700', '#ADFF2F']
+
+plt.figure(figsize=(10, 10), facecolor='#0B0C10')
+ax = plt.subplot(111, projection='polar')
+ax.set_facecolor('#0B0C10')
+
+# Plot the structural boundaries of your framework
+theta_circle = np.linspace(0, 2*np.pi, 500)
+ax.plot(theta_circle, np.ones_like(theta_circle) * visualizer.r_plus, 
+        color='#FF0055', linestyle='--', linewidth=2.5, label='Event Horizon Boundary (r_plus)')
+ax.fill_between(theta_circle, 0, visualizer.r_plus, color='#FF0055', alpha=0.07)
+
+# Plot the particle paths showing the transformation into the spinning chain state
+for start_angle, col in zip(angles, colors):
+    r_vals, phi_vals = visualizer.generate_trajectory(r_start=5.0, phi_start=start_angle)
+    ax.plot(phi_vals, r_vals, color=col, linewidth=2, alpha=0.85, label='Infalling Mass Pipeline' if start_angle==0 else "")
+
+# Visual styling parameters to clean up the graph presentation
+ax.set_title("The Conformal Cosmic Funnel: Kerr Spacetime Trajectories\n(Centrifugal Stabilization Framework)", 
+             color='#66FCF1', fontsize=14, fontweight='bold', pad=20)
+ax.grid(True, color='#1F2833', linestyle=':', alpha=0.6)
+ax.tick_params(colors='#66FCF1', labelsize=10)
+ax.set_rlabel_position(135)
+ax.legend(loc='upper right', framealpha=0.1, labelcolor='white')
+
+# Save visual to disk
+plt.savefig('cosmic_funnel_trajectories.png', dpi=300, facecolor='#0B0C10', bbox_inches='tight')
+print("[SUCCESS] Matplotlib trajectory visualization rendered and saved as 'cosmic_funnel_trajectories.png'.")
